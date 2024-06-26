@@ -12,6 +12,20 @@ export const LogInPage: React.FC<LogInPagePrompt> = ({ changeLogInStatus }) => {
   const [openaiKey, setOpenaiKey] = useState<string>("");
   const [geminiKey, setGeminiKey] = useState<string>("");
 
+ // Function to request full screen mode
+ const requestFullScreen = () => {
+  const docElm = document.documentElement;
+  if (docElm.requestFullscreen) {
+    docElm.requestFullscreen();
+  } else if (docElm.mozRequestFullScreen) { /* Firefox */
+    docElm.mozRequestFullScreen();
+  } else if (docElm.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+    docElm.webkitRequestFullscreen();
+  } else if (docElm.msRequestFullscreen) { /* IE/Edge */
+    docElm.msRequestFullscreen();
+  }
+};
+
   //
   const submit = () => {
     window.ipcRenderer.send("request-to-backend", {
